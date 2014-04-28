@@ -1,0 +1,45 @@
+<table class="table table-striped table-hover .table-responsive">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Place</th>
+          <th>Time</th>
+          <th>Acts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% i=0 %>
+      <%while i < @concerts.count do %>
+      <% @concerts[i].each do |concert| %>
+        <tr>
+          <% if !concert.at_css('.type_stage').nil? %>
+          <td><%= concert.at_css('.type_stage').text %></td>
+          <% else  %>
+          <td>
+            <%= concert.at_css('.type_dancefloor').text %>
+          </td>
+          <% end %>
+
+          <td>
+
+            <% @concerts[i].css('h4').each do |place| %>
+            <p><%= place.text %></p>
+            <% end  %>
+          </td>
+
+          <td>
+        <% @concerts[i].css(".running_order_time").each do |time| %>
+        <p><%=time.text%></p>
+        <% end %>
+        </td>
+        <td>
+        <% @concerts[i].css(".running_order_name").each do |name| %>
+        <p><%=name.text%></p>
+        <% end %>
+        </td>
+      </tr>
+        <% end %>
+        <% i = i+1 %>
+        <% end %>
+      </tbody>
+    </table>
